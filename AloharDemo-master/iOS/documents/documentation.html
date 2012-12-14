@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alohar SDK</title>
+    
+    <link rel="stylesheet" type="text/css" href="http://documentup.com/stylesheets/screen.css">
+    
+    
+
+    
+
+    <!-- Typekit -->
+    
+      <script type="text/javascript">
+        (function() {
+          var config = {
+            kitId: 'hjp0pft',
+            scriptTimeout: 3000
+          };
+          var h=document.getElementsByTagName("html")[0];h.className+=" wf-loading";var t=setTimeout(function(){h.className=h.className.replace(/( |^)wf-loading( |$)/g,"");h.className+=" wf-inactive"},config.scriptTimeout);var tk=document.createElement("script");tk.src='//use.typekit.net/'+config.kitId+'.js';tk.type="text/javascript";tk.async="true";tk.onload=tk.onreadystatechange=function(){var a=this.readyState;if(a&&a!="complete"&&a!="loaded")return;clearTimeout(t);try{Typekit.load(config)}catch(b){}};var s=document.getElementsByTagName("script")[0];s.parentNode.insertBefore(tk,s)
+        })();
+      </script>
+    
+  </head>
+  <body><div id="container">
+  <div id="nav">
+    
+      <div id="header">
+        <a href="#" id="logo">Alohar SDK</a>
+      </div>
+    
+    <ul id="sections">
+      
+        <li>
+          <a href="#overview">Overview</a>
+          
+        </li>
+      
+        <li>
+          <a href="#alohar-sdk-requirements">Alohar SDK Requirements</a>
+          
+        </li>
+      
+        <li>
+          <a href="#initialization-session-delegate">Initialization / Session Delegate</a>
+          
+            <ul>
+              
+                <li>
+                  <a href="#initialization-session-delegate/user-registration">User Registration</a>
+                </li>
+              
+                <li>
+                  <a href="#initialization-session-delegate/active-methods">Active Methods</a>
+                </li>
+              
+                <li>
+                  <a href="#initialization-session-delegate/callbacks">Callbacks</a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+        <li>
+          <a href="#request-delegate">Request Delegate</a>
+          
+            <ul>
+              
+                <li>
+                  <a href="#request-delegate/active-methods">Active Methods</a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+        <li>
+          <a href="#change-delegate">Change Delegate</a>
+          
+            <ul>
+              
+                <li>
+                  <a href="#change-delegate/active-methods">Active Methods</a>
+                </li>
+              
+                <li>
+                  <a href="#change-delegate/callbacks">Callbacks</a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+        <li>
+          <a href="#non-delegate-methods">Non-delegate methods</a>
+          
+        </li>
+      
+        <li>
+          <a href="#objects">Objects</a>
+          
+            <ul>
+              
+                <li>
+                  <a href="#objects/aluserstay">ALUserStay</a>
+                </li>
+              
+                <li>
+                  <a href="#objects/alplace">ALPlace</a>
+                </li>
+              
+                <li>
+                  <a href="#objects/almotionstate">ALMotionState</a>
+                </li>
+              
+                <li>
+                  <a href="#objects/almobilestate">ALMobileState</a>
+                </li>
+              
+                <li>
+                  <a href="#objects/alresponse">ALResponse</a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+    </ul>
+    
+    
+  </div>
+  <div id="content">
+    
+    <h1>Alohar SDK Reference</h1>
+<h2 id='overview'>Overview</h2 id='overview'>
+<p><strong>Alohar</strong> offers a mobile device Location Behavior Platform allowing developers to respond user behaviors by analyzing location and device sensor data. Alohar delivers real time device data from location, motion, wifi and timing data. Its advanced functionality gives competitive advantages in applications than a conventional location based services (LBS) platform.
+
+</p>
+<p>Alohar platform is now available for iOS SDK and Android SDK. Alohar SDK is ideal for applications such as smart personal assistants, location-based games, mobile health apps, mobile shopping/coupon apps, social networking apps and mobile dating apps.
+<br/>
+
+</p>
+<p><strong>Smart things you can do with the Alohar SDK</strong>
+
+</p>
+<ul>
+<li>Automatically understand a user&#39;s mobile motion state (e.g. stationary, walking or driving).</li>
+<li>Automatically detect the places (including the name and category) that the user visits.</li>
+<li>Get notifications when a user arrives at or departs from a place.</li>
+<li>Automatically get the number of times a user visits a place, and how much time is spent there per visit.</li>
+<li>Minimize power consumption while gathering data from the mobile device.</li>
+</ul>
+<p>The beauty of the Alohar SDK is that you can focus on your application-specific functionalities, rather than low level user location and behavior, and therefore achieve a fast time to market. 
+
+</p>
+<p><strong>For Alohar Beginners</strong>. We recommend you to review <a href="tutorial.html">getting started guide</a>. For details on a method or class, please refer to the <a href="apple_doc/html/index.html">Alohar API</a> documentation.
+
+</p>
+<h2 id='alohar-sdk-requirements'>Alohar SDK Requirements</h2 id='alohar-sdk-requirements'>
+<p>Alohar SDK <strong>requires Xcode 4.2+</strong> for development, and <strong>iOS 5.0+</strong> for both development and distribution and to access advanced location features of iOS. You can update your software from Apple&#39;s developer portal: <a href="https://developer.apple.com/">developer.apple.com</a>.
+
+</p>
+<hr style="padding: 0; margin: 0;"/>
+
+<h2 id='initialization-session-delegate'>Initialization / Session Delegate</h2 id='initialization-session-delegate'>
+<p><strong>Alohar SDK</strong> provides a single global interface to manage its core service and other major components. Developer can manage the core service, place manager and motion manager within Alohar SDK. By calling the register or authenticate methods, a new Alohar session is initialized and monitoring can begin.
+
+</p>
+<p>Alohar handles the developer’s identity in an anonymous fashion.  The developer manages the authentication of their own application end-users. Alohar does not require the identity of the users of the third-party application. Instead, the application developer only provides an anonymous user id to Alohar, which Alohar uses to manage each user’s data. This way, Alohar never sees the real identity of the user of the developer’s application.
+
+</p>
+<p><strong>Alohar SDK</strong> requires the app developer to register each of their user with the Alohar SDK using <code>[Alohar registerWithAppID:andAPIKey]</code>. Note that the developer does not need to pass the application-specific username to Alohar SDK. <code>registerWithAppID</code> generates a unique UserId (UID). This UserId is for Alohar SDK to manage the specific user’s info.
+
+</p>
+<p>It is the developer’s responsibility to record the unique UID generated by register() to do authentication and retrieve data from Alohar in the future. The developer is responsible to maintain the mapping of their users and the Alohar userids.
+
+</p>
+<p>The second time the app is run for the specific user, the app uses the UID and calls Alohar.authenticate() from Alohar context to authenticate the user. Once the user is authenticated, the app can start to manage the core service and access user information from Alohar platform.
+
+</p>
+<h3 id='initialization-session-delegate/user-registration'>User Registration</h3 id='initialization-session-delegate/user-registration'>
+<p>After the Alohar context is initialized, the developer needs to register and authenticate their user in Alohar system. <strong>Alohar SDK</strong> manages the authentication and authorization and securely communicate with the Alohar servers.
+
+</p>
+<p>To register a new end user of the developer’s app, use the following register method of the Alohar class, which returns an unique UserID (UID) if the call is valid. Again, <strong>your app must manage the userID to allow data retrieval in the future.</strong> 
+
+</p>
+<h3 id='initialization-session-delegate/active-methods'>Active Methods</h3 id='initialization-session-delegate/active-methods'>
+<h4><strong>registerWithAppID:andAPIKey:withDelegate</strong></h4>
+<p>Call this method to start an Alohar session for a new user. Your app ID and API key are used to associate this user with your Alohar developer account. 
+
+</p>
+<p>You can obtain AppleID by following the steps in <a href="tutorial.html">getting started guide</a>.
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)registerWithAppID:(<span class="built_in">NSString</span> *)appID
+                andAPIKey:(<span class="built_in">NSString</span> *)APIKey
+             withDelegate:(<span class="keyword">id</span>&lt;ALSessionDelegate>)delegate;</code></pre>
+<p>Example:
+
+</p>
+<pre><code>[<span class="class">Alohar</span> <span class="method">registerWithAppID:</span>@<span class="comment">"appID"</span> 
+                <span class="method">andAPIKey:</span>@<span class="comment">"APIKey"</span>
+             <span class="method">withDelegate:</span><span class="keyword">self</span>];</code></pre>
+<h5>Parameters</h5>
+<ul>
+<li><em>appID</em>: The app ID you were given when you created your Alohar developer account. This is an <code>NSString</code>.</li>
+<li><em>APIKey</em>: The private identifier for your Alohar developer account. This is a hexadecimal <code>NSString</code>.</li>
+<li><em>delegate</em>: The object supporting <code>ALSessionDelegate</code> passed to this function will receive session callbacks. See <a href="#sessiondelegate-callbacks">callbacks</a> in this section for further details.</li>
+</ul>
+<div id='authenticateWithAPITokenandSecretandUserTokenwithDelegate' style='padding:0;margin:0;'></div>
+
+<h4><strong>authenticateWithAppID:andAPIKey:andUserID:withDelegate</strong></h4>
+<p>Use this method when you have an existing user token to associate this account with. This is only necessary for associating a single user across multiple devices.
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)authenticateWithAppID:(<span class="built_in">NSString</span> *)appID
+                    andAPIKey:(<span class="built_in">NSString</span> *)APIKey
+                    andUserID:(<span class="built_in">NSString</span> *)userID
+                 withDelegate:(<span class="keyword">id</span>&lt;ALSessionDelegate>)delegate;</code></pre>
+<h5>Parameters</h5>
+<ul>
+<li><em>appID</em>: The app ID you were given when you created your Alohar developer account. This is an <code>NSString</code>.</li>
+<li><em>APIKey</em>: The private identifier for your Alohar developer account. This is a hexadecimal <code>NSString</code>.</li>
+<li><em>userID</em>: The unique <code>NSString</code> identifier for the current user. You can get this string by using <code>registerWithAppID</code> above.</li>
+<li><em>delegate</em>: The object supporting <code>ALSessionDelegate</code> passed to this function will receive session callbacks. See <a href="#sessiondelegate-callbacks">callbacks</a> in this section for further details.</li>
+</ul>
+<h4><strong>startMonitoringUser</strong></h4>
+<p>This starts the motion and location monitoring, which is necessary for collection of userstays and motion state. .
+
+</p>
+<pre><code>[Alohar startMonitoringUser]</code></pre>
+<h4><strong>stopMonitoringUser</strong></h4>
+<p>This ends the motion and location monitoring, which is necessary for collection of userstays and motion state. When this method is called, all user data collection and transmission is stopped. No further location data or motion data will be available until startMonitoringUser is called again.
+
+</p>
+<pre><code>[Alohar stopMonitoringUser]</code></pre>
+<div id='sessiondelegate-callbacks' style='padding:0;margin:0;'/></div>
+
+<h3 id='initialization-session-delegate/callbacks'>Callbacks</h3 id='initialization-session-delegate/callbacks'>
+<h4><strong>aloharDidLogin</strong></h4>
+<p>This method is called by Alohar when a user is successfully logged in. The user ID is a globally unique <code>NSString</code> that identifies that user across devices. If you pass this ID in the <a href="#authenticateWithAPITokenandSecretandUserTokenwithDelegate">authentication method</a>, Alohar will be able to use the existing user data across devices and installs. This callback is a good time to call startMonitoring user to begin data collection.
+
+</p>
+<pre><code>- (<span class="keyword">void</span>)aloharDidLogin:(<span class="built_in">NSString</span> *)userID;</code></pre>
+<h5>Parameters</h5>
+<ul>
+<li><em>userID</em>: This is a unique <code>NSString</code> that can be used to identify a user across devices. </li>
+</ul>
+<h4><strong>aloharDidFailWithError</strong></h4>
+<p>This method is called when there is an issue with the Alohar service. This can be due to a failed signup/login, or an unexpected termination of service. This method will also be called when location is not available for a user (it can be determined by user preference or caused by device issues).
+
+</p>
+<pre><code>- (void)aloharDidFailWithError:(<span class="title">NSError</span> *)<span class="built_in">error</span>;</code></pre>
+<hr style="padding: 0; margin: 0;"/>
+
+<h2 id='request-delegate'>Request Delegate</h2 id='request-delegate'>
+<p>Alohar&#39;s request structure allows queries to be made against the collected data. Each of these queries uses blocks to return the results asynchronously. Here&#39;s an example:
+
+</p>
+<p>Method:
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)getDetailsForStay:(<span class="built_in">NSInteger</span>)stayId
+               completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<p>Usage:
+
+</p>
+<pre><code>[Alohar getDetailsForStay:stayID completion:^(ALResponse *response, <span class="built_in">NSError</span> *error) {
+    <span class="keyword">if</span> (error) {
+        <span class="built_in">NSLog</span>(@<span class="string">"Request Failed. Error %@"</span>, error);
+    } <span class="keyword">else</span> {
+        <span class="built_in">NSLog</span>(@<span class="string">"Request Succeeded!"</span>);
+        <span class="comment">//The resulting user stay is stored in the variable 'response'</span>
+    }
+}];</code></pre>
+<h3 id='request-delegate/active-methods'>Active Methods</h3 id='request-delegate/active-methods'>
+<p>There are several methods to search through a user&#39;s stay history. 
+
+</p>
+<h4><strong>getUserStaysForDate:completion</strong></h4>
+<p>Calling this method with an <code>NSDate</code> will return all user stays that overlap with that 24-hour period.
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)getUserStaysForDate:(<span class="built_in">NSDate</span> *)date
+                 completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<h4><strong>getUserStaysFromDate:toDate:completion</strong></h4>
+<p>This method returns all user stays that overlap with the period between two <code>NSDate</code>s. 
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)getUserStaysFromDate:(<span class="built_in">NSDate</span> *)startDate
+                      toDate:(<span class="built_in">NSDate</span> *)endDate
+                  completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<h4><strong>getUserStaysFromDate:toDate:atLocation:radius:limit:includeCandidiates:completion</strong></h4>
+<p>Get user&#39;s user stays within a time period and a location boundary.
+
+</p>
+<pre><code> + (<span class="keyword">void</span>)getUserStaysFromDate:(<span class="built_in">NSDate</span> *)startDate
+                       toDate:(<span class="built_in">NSDate</span> *)endDate
+                   atLocation:(CLLocation *)location
+                       radius:(<span class="built_in">NSInteger</span>)radius limit:(<span class="built_in">NSInteger</span>)limit
+           includeCandidiates:(<span class="built_in">BOOL</span>)includeCandidates
+                   completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<h5>Parameters</h5>
+<ul>
+<li><strong>startDate</strong>: The start time</li>
+<li><strong>endDate</strong>: The end time</li>
+<li><strong>location</strong>: The centroid location of the search area. Optional (pass nil to skip).</li>
+<li><strong>radius</strong>: The search radius in meter. Optional (pass nil to skip). Skip if the location is not provided.</li>
+<li><strong>limit</strong>: The limitation of total number matches to return. Optional (pass nil to skip). The default is 500.</li>
+<li><strong>includeCandidates</strong>: Flag to indicate whether the user stay shall include its candidates. The default is NO.</li>
+<li><strong>completion</strong>: This block is called on completion, with either a successful ALResponse or NSError describing the problem encountered.</li>
+</ul>
+<h4><strong>getAllPlacesWithCompletion</strong></h4>
+<p>This method returns all <code>ALPlace</code>s that the user has ever visited. <em>NOTE:</em> The response size depends on total number of visits -- for long-term users, this can be hundreds of KB. We recommend using getPlaces:withCategory:withDelegate to return more manageable results.                     
+
+</p>
+<pre><code> + (<span class="keyword">void</span>)getAllPlacesWithCompletion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<h4><strong>getPlacesWithPattern:completion</strong></h4>
+<p>This method returns all <code>ALPlace</code>s that match the <code>namePattern</code> regex <code>NSString</code> passed to it. For example, passing <code>@&quot;^McDo&quot;</code> will return all places with names that start with @&quot;McDo&quot; (likely a list of McDonalds visits).
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)getPlacesWithPattern:(<span class="built_in">NSString</span> *)namePattern
+                  completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<h4><strong>getPlacesWithPattern:andCategory:completion</strong></h4>
+<p>This method returns all <code>ALPlace</code>s that match the <code>namePattern</code> regex <code>NSString</code> passed to it. For example, calling <code>[Alohar getPlaces:@&quot;.*&quot; withCategory:@&quot;^rest&quot; withDelegate:self]</code> will return all places with categories starting with rest -- likely a list of restaurants and possibly rest stops.
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)getPlacesWithPattern:(<span class="built_in">NSString</span> *)namePattern
+                andCategory:(<span class="built_in">NSString</span> *)catPattern
+                  completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<h4><strong>getPlacesWithPattern:fromDate:toDate:minimalVisits:withCategory:limit:completion</strong></h4>
+<p>This is the most advanced filter we provide for user stays. See the &quot;Parameters&quot; section below for guidance on each value.
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)getPlacesWithPattern:(<span class="built_in">NSString</span> *)namePattern
+         fromDate:(<span class="built_in">NSDate</span> *)startDate
+           toDate:(<span class="built_in">NSDate</span> *)endDate
+    minimalVisits:(<span class="built_in">NSInteger</span>)visits
+     withCategory:(<span class="built_in">NSString</span> *)catPattern
+            limit:(<span class="built_in">NSInteger</span>)limit
+       completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<h5>Parameters</h5>
+<ul>
+<li><strong>namePattern</strong>: The regular expression to match the place names.</li>
+<li><strong>startDate</strong>: The start date.</li>
+<li><strong>endDate</strong>: The end date.</li>
+<li><strong>visits</strong>: The minimal number of visits for each place.</li>
+<li><strong>catPattern</strong>: The regular expression to match the place&#39;s category.</li>
+<li><strong>limit</strong>: The maximum number of matches to return. Pass nil for default (500).</li>
+<li><strong>completion</strong>: A block to be called on completion, with either a successful <code>ALResponse</code> or <code>NSError</code> describing the problem.</li>
+</ul>
+<h4><strong>getPlaceCandidatesForStay:completion</strong></h4>
+<p>This method returns all of the possible places a user stay could refer to. The Alohar SDK attempts to choose the right place, but orders all possibilities into a candidate list. 
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)getPlaceCandidatesForStay:(<span class="built_in">NSInteger</span>)stayId
+                       completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<h4><strong>getStaysForPlace:completion</strong></h4>
+<p>This method returns all user stays for a given place.
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)getStaysForPlace:(<span class="built_in">NSInteger</span>)placeId
+              completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<h4><strong>getDetailsForPlace:completion</strong></h4>
+<p>This method returns the full details for a place.
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)getDetailsForPlace:(<span class="built_in">NSInteger</span>)placeId
+                completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<h4><strong>getDetailsForStay:completion</strong></h4>
+<p>This method returns the full details for a user stay.
+
+</p>
+<pre><code>+ (<span class="keyword">void</span>)getDetailsForStay:(<span class="built_in">NSInteger</span>)stayId
+               completion:(<span class="keyword">void</span> (^)(ALResponse *response, <span class="built_in">NSError</span> *error))completion;</code></pre>
+<hr style="padding: 0; margin: 0;"/>
+
+<h2 id='change-delegate'>Change Delegate</h2 id='change-delegate'>
+<p>The change delegate allows you to receive callbacks when the user&#39;s state changes. This includes motion state (e.g. walking, driving), as well as location and user stay updates.
+
+</p>
+<h3 id='change-delegate/active-methods'>Active Methods</h3 id='change-delegate/active-methods'>
+<h4><strong>setMotionDelegate</strong></h4>
+<p>Use this method to register for motion state callbacks. If Alohar is currently monitoring the user (see <code>startMonitoringUser</code>), Alohar will call <code>didUpdateToMotionState:fromMotionState</code> on this delegate when the user changes their motion state.
+
+</p>
+<pre><code>+ (void)setMotionDelegate:(id <span class="tag">&lt;<span class="title">ALMotionDelegate</span>></span>)delegate;</code></pre>
+<h4><strong>setUserStayDelegate</strong></h4>
+<p>Use this method to register for user stay callbacks. If Alohar is currently monitoring the user (see <code>startMonitoringUser</code>), Alohar will call <code>userArrivedAtPlaceWithLocation</code>, <code>currentUserStayIdentified</code>, and <code>userDepartedPlaceWithLocation</code> on this delegate (see callback descriptions below).  
+
+</p>
+<pre><code>+ (void)setUserStayDelegate:(id <span class="tag">&lt;<span class="title">ALUserStayDelegate</span>></span>)delegate;</code></pre>
+<h3 id='change-delegate/callbacks'>Callbacks</h3 id='change-delegate/callbacks'>
+<h4><strong>didUpdateToMotionState:fromMotionState</strong></h4>
+<p>This callback is sent to the delegate when Alohar detects that the user has changed their motion state. See the <code>ALMotionState</code> object for possible user states.
+
+</p>
+<pre><code><span class="pp">- <span class="params">(void)</span>didUpdateToMotionState:<span class="params">(<span class="variable">ALMotionState</span> *)</span>newMotionState 
+           fromMotionState:<span class="params">(<span class="variable">ALMotionState</span> *)</span>oldMotionState;</code></pre>
+<h4><strong>userArrivedAtPlace:withLocation</strong></h4>
+<p>This callback is sent to the delegate when Alohar detects that the user has arrived at a new place. This callback includes latitude and longitude with a optional personal place if it is close enough to the centroid of the arrival -- once the final place of the stay has been determined, the delegate will receive <code>currentUserStayIdentified</code>.
+
+</p>
+<pre><code><span class="pp">- <span class="params">(void)</span>userArrivedAtPlace:<span class="params">(<span class="variable">ALPlace</span> *)</span>personalPlace withLocation:<span class="params">(<span class="variable">CLLocation</span> *)</span>location;</code></pre>
+<h4><strong>userDepartedPlaceWithLocation</strong></h4>
+<p>This callback is sent to the delegate when Alohar detects that the user has left their current place. This callback includes the latitude and longitude of the place the user has left.
+
+</p>
+<pre><code><span class="pp">- <span class="params">(void)</span>userArrivedAtPlaceWithLocation:<span class="params">(<span class="variable">CLLocation</span> *)</span>location;</code></pre>
+<h4><strong>currentUserStayIdentified</strong></h4>
+<p>This callback is sent to the delegate when Alohar detects a new user stay. This <code>ALUserStay</code> object includes location, place name, and several other valuable pieces of data. See the <code>ALUserStay</code> object for further details.             
+
+</p>
+<pre><code><span class="pp">- <span class="params">(void)</span>currentUserStayIdentified:<span class="params">(<span class="variable">ALUserStay</span> *)</span>newStay;</code></pre>
+<h4><strong>aloharDidFailWithError</strong></h4>
+<p>This callback is sent to the delegate when an error occurs with either motion state or user stays
+
+</p>
+<pre><code>- (void)aloharDidFailWithError:(<span class="title">NSError</span> *)<span class="built_in">error</span>;</code></pre>
+<hr style="padding: 0; margin: 0;"/>
+
+<h2 id='non-delegate-methods'>Non-delegate methods</h2 id='non-delegate-methods'>
+<p>These methods return immediately. They are called directly on the <code>Alohar</code> class -- for example, to get the current user stay, simply call <code>[Alohar currentUserStay]</code>.
+
+</p>
+<h4><strong>currentUserStay</strong></h4>
+<p>This returns the user stay the user is currently in, or nil if no user stay exists.
+
+</p>
+<pre><code>+ (<span class="title">ALUserStay</span> *)currentUserStay;</code></pre>
+<h4><strong>currentLocation</strong></h4>
+<p>This returns the latest known location for the user.
+
+</p>
+<pre><code>+ (<span class="title">CLLocation</span> *)currentLocation;</code></pre>
+<h4><strong>currentLocation</strong></h4>
+<p>This returns the current motion state for the user. See <code>ALMotionState</code> for possible states.
+
+</p>
+<pre><code>+ (<span class="title">ALMotionState</span> *)currentMotionState;</code></pre>
+<h4><strong>isStationary</strong></h4>
+<p>This method returns TRUE if the device is not moving, FALSE in all other cases.  
+
+</p>
+<pre><code>+ (<span class="built_in">BOOL</span>)isStationary;</code></pre>
+<h4><strong>isStationary</strong></h4>
+<p>This method returns FALSE if the user is currently staying at a place, TRUE in all other cases.   
+
+</p>
+<pre><code>+ (<span class="built_in">BOOL</span>)isBetweenUserStays;</code></pre>
+<h4><strong>monitoringUser</strong></h4>
+<p>This method can be used to see if Alohar is tracking the user, and will return TRUE if user monitoring is on.   
+
+</p>
+<pre><code>+ (<span class="built_in">BOOL</span>)monitoringUser;</code></pre>
+<h4><strong>monitoringUser</strong></h4>
+<p>This method returns TRUE if the user has valid credentials and has an active Alohar session, FALSE in all other cases.  
+
+</p>
+<pre><code>+ (<span class="built_in">BOOL</span>)isLoggedIn;</code></pre>
+<hr style="padding: 0; margin: 0;"/>
+
+<h2 id='objects'>Objects</h2 id='objects'>
+<p>Alohar provides a few useful object types to give more data details.
+
+</p>
+<h3 id='objects/aluserstay'>ALUserStay</h3 id='objects/aluserstay'>
+<p>The <code>ALUserStay</code> object represents a user&#39;s visit to a place.
+
+</p>
+<h5>Properties</h5>
+<p><code>NSInteger stayID</code> <em>The unique identifier for this user stay</em>
+
+</p>
+<p><code>CLLocation *centroidLocation</code> <em>The estimated location of the user stay</em>
+
+</p>
+<p><code>NSInteger startTime</code> <em>Unix time the user arrived at this location</em>
+
+</p>
+<p><code>NSInteger endTime</code> <em>Unix time the user left this location</em>
+
+</p>
+<p><code>ALPlace *selectedPlace</code> <em>The place Alohar believes corresponds to this visit</em>
+
+</p>
+<p><code>NSArray *candidates</code> <em>The full list of possible place options</em>
+
+</p>
+<h3 id='objects/alplace'>ALPlace</h3 id='objects/alplace'>
+<p>The <code>ALPlace</code> object represents a point of interest, e.g. a coffee shop. 
+
+</p>
+<h5>Properties</h5>
+<p><code>NSInteger placeID;</code> <em>The unique identifier for this place</em>
+
+</p>
+<p><code>NSInteger visitCount</code> <em>The number of times the user has visited this place</em>
+
+</p>
+<p><code>NSString *name</code> *The name of this place, e.g. &quot;Pizza Hut&quot;
+
+</p>
+<p><code>CLLocation *location</code> <em>The location of the center of this place.</em>
+
+</p>
+<p><code>NSString *address</code> <em>The street address</em>
+
+</p>
+<p><code>NSString *phone</code> <em>The phone number if available</em>
+
+</p>
+<p><code>NSString *iconURL</code> <em>URL for an icon that depicts this place&#39;s category</em>
+
+</p>
+<p><code>NSString *webURL</code> <em>URL for the Google Places page for this place</em>
+
+</p>
+<p><code>NSString *category</code> <em>Description of the type of place, e.g. Home</em>
+
+</p>
+<p><code>NSString *subCategory</code> <em>More detailed description, e.g. Italian Bistro</em>
+
+</p>
+<h3 id='objects/almotionstate'>ALMotionState</h3 id='objects/almotionstate'>
+<p>The <code>ALMotionState</code> object represents a category of motion from the user.
+
+</p>
+<pre><code><span class="title">Possible</span> Motion States:
+   ALMotionStateStationary
+   ALMotionStateWalking
+   ALMotionStateDriving
+   ALMotionStateNoData
+   ALMotionStateBigMove</code></pre>
+<h5>Property</h5>
+<p><code>NSNumber *state</code> <em>The raw state value (see above to find the meaning of each number</em>
+
+</p>
+<p>Call <code>[motionState stateDiscription]</code> for a pretty <code>NSString</code> version of the current state. Possible values are <code>Stationary</code>, <code>Big Move</code>, <code>Driving</code>, <code>Walking</code>, and <code>unknown</code>.
+
+</p>
+<pre><code>- (<span class="title">NSString</span> *)stateDescription;</code></pre>
+<h3 id='objects/almobilestate'>ALMobileState</h3 id='objects/almobilestate'>
+<p>The <code>ALMobileState</code> object represents a category of high level movement from the user.
+
+</p>
+<pre><code><span class="title">Possible</span> Mobile States:
+   ALMobileStateUnknown
+   ALMobileStateNotMoving
+   ALMobileStateSlowMoving
+   ALMobileStateFastMoving</code></pre>
+<h5>Property</h5>
+<p><code>NSNumber *state</code> <em>The raw state value (see above to find the meaning of each number</em>
+
+</p>
+<p>Call <code>[mobileState stateDiscription]</code> for a pretty <code>NSString</code> version of the current state. Possible values are <code>Not Moving</code>, <code>Slow Moving</code>, <code>Fast Moving</code>, and <code>unknown</code>.
+
+</p>
+<pre><code>- (<span class="title">NSString</span> *)stateDescription;</code></pre>
+<h3 id='objects/alresponse'>ALResponse</h3 id='objects/alresponse'>
+<p>The <code>ALResponse</code> object is a wrapper for the return values for all requests to the Alohar service.
+
+</p>
+<pre><code><span class="title">Request</span> Types:
+    kALRequestTypeUserStays,
+    kALRequestTypePlaces,
+    kALRequestTypeStayDetail,
+    kALRequestTypePlaceDetail
+    kALRequestTypeCorrectUserStay,
+    kALRequestTypeAddUserStay,
+    kALRequestTypeDeleteUserStay</code></pre>
+<h5>Properties</h5>
+<p><code>NSDate *timeStamp</code> <em>The date that this request was returned</em>
+
+</p>
+<p><code>NSMutableArray *objects</code> *The returned values from the request. Even if there is only one result, unless it is NIL otherwise it will always be wrapped in an <code>NSMutableArray</code>.
+
+</p>
+<p><code>ALRequestType requestType</code> *The type of request this response is from. See Request Types above for the available options.
+
+</p>
+<p><hr style="padding: 0; margin: 0;"/>
+<br/><br/><p>Copyright 2011-2012 Alohar Mobile Inc. All rights reserved.</p><br/>
+<span style='display:none'>curl -X POST -d &quot;name=Alohar SDK&quot; --data-urlencode content@documentation.md <a href="http://documentup.com/compiled?name=super%26">http://documentup.com/compiled?name=super%26</a> &gt; documentation.html &amp;&amp; open documentation.html </span>
+</p>
+
+  </div>
+</div></body>
+</html>
